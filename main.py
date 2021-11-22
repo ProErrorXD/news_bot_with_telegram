@@ -23,6 +23,9 @@ while True:
         url = base_url+'/getUpdates'
         res=requests.get(url)
 
+        result=json.loads(res.text)['result'][0]
+        text=result['message']['text']
+  
         # If no Update id found, we will have to use last update ID saved    
         res=res.text
         res=json.loads(res)['result']
@@ -41,9 +44,7 @@ while True:
     if len(json.loads(res.text)['result'])==0:
         continue
     
-    result=json.loads(res.text)['result'][0]
-    text=result['message']['text']
-    
+      
     # ending operation
     if text.lower()=='end':
         break
